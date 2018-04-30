@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="new_contact_btn_text">new contact</string>
+    <string name="show_old_btn_text">show old</string>
+    <string name="show_young_btn_text">show young</string>
+    <string name="show_all_btn_text">show all</string>
+    <string name="enter_first_name_field_text">enter first name</string>
+    <string name="enter_last_name_field_text">enter last name</string>
+    <string name="enter_id_field_text">enter ID number</string>
+    <string name="enter_birth_year_field_text">enter birth year</string>
+    <string name="save_new_contact_btn_text">save</string>
+</resources>
