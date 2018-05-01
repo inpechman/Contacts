@@ -17,24 +17,29 @@ import java.util.ArrayList;
  */
 
 class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactVH> {
+    private int rowsToLoad;
     Context context;
     int type;
     ArrayList<Contact> contactArrayList;
     DataBaseMgr dbm;
     TextView infoBar;
+    OnFinishScrollListener listener;
 
-    public ContactsRecyclerViewAdapter(Context context, int type) {
+    public ContactsRecyclerViewAdapter(Context context, final int type, int rowsToLoad) {
         this.context = context;
         this.type = type;
         dbm = DataBaseMgr.getInstance(context);
+        this.rowsToLoad = rowsToLoad;
 
         switch (type){
             case 1:
+                contactArrayList = dbm.getByDate(1958, true, 1, rowsToLoad);
                 break;
             case 2:
+                contactArrayList = dbm.getByDate(1983, false, 1, rowsToLoad);
                 break;
             default:
-                contactArrayList = dbm.getAll();
+                contactArrayList = dbm.getAll(1, rowsToLoad);
         }
     }
 
@@ -49,10 +54,17 @@ class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactVH> {
     public void onBindViewHolder(ContactVH holder, int position) {
         holder.update(contactArrayList.get(position));
         infoBar.setText(position + " / " + getItemCount());
+        if (position == getItemCount() - 5 && listener != null) {
+            listener.onFinishScroll(type, contactArrayList);
+        }
     }
 
     @Override
     public int getItemCount() {
         return contactArrayList.size();
+    }
+
+    public void setOnFinishScrollListener(OnFinishScrollListener onFinishScrollListener) {
+        this.listener = onFinishScrollListener;
     }
 }

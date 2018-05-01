@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        genRandData();
+//        genRandData();
         newContact = findViewById(R.id.new_contact_btn);
         showOld = findViewById(R.id.show_old_btn);
         showYoung = findViewById(R.id.show_young_btn);
@@ -32,14 +32,18 @@ public class MainActivity extends AppCompatActivity {
         showOld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ShowContacts.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
             }
         });
 
         showYoung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ShowContacts.class);
+                intent.putExtra("type", 2);
+                startActivity(intent);
             }
         });
 
@@ -53,9 +57,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void genRandData(){
-        for (int i = 0; i < 2000; i++) {
-            Contact contact = new Contact("f" + i, "l" + i, "" + i, (int) (Math.random()*100 + 1918));
-            DataBaseMgr.getInstance(getApplicationContext()).insertContact(contact);
-        }
+        new Thread(){
+            @Override
+            public void run() {
+                for (int i = 0; i < 10000; i++) {
+                    Contact contact = new Contact("f" + i, "l" + i, "" + i, (int) (Math.random()*100 + 1918));
+                    DataBaseMgr.getInstance(getApplicationContext()).insertContact(contact);
+                }
+
+            }
+        }.start();
+
     }
 }

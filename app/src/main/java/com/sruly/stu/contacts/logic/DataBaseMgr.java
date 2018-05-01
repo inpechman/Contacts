@@ -52,15 +52,23 @@ public class DataBaseMgr {
 
     }
 
-    public synchronized ArrayList<Contact> getByDate(int year, boolean reverse){
-        return null;
+    public synchronized ArrayList<Contact> getAll(int offset, int rowsToLoad){
+        return getByFilter("", offset, rowsToLoad);
     }
 
-    public synchronized ArrayList<Contact> getAll(){
+    public synchronized ArrayList<Contact> getByDate(int year, boolean reverse, int offset, int rowsToLoad){
+        String filter = "WHERE birth_year " +
+                (reverse ? "<=" : ">=") +
+                year;
+        return getByFilter(filter, offset, rowsToLoad);
+    }
+
+    public synchronized ArrayList<Contact> getByFilter(String filter, int offset, int rowsToLoad){
         ArrayList<Contact> contactArrayList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM all_contacts ORDER BY birth_year ASC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM all_contacts " + filter + " ORDER BY birth_year ASC", null);
         if (cursor != null){
-            if (cursor.moveToFirst()){
+            if (cursor.move(offset)/*cursor.moveToFirst()*/){
+                int counter = 0;
                 do {
                     Contact contact = new Contact(
                             cursor.getString(cursor.getColumnIndex("first_name")),
@@ -69,8 +77,10 @@ public class DataBaseMgr {
                             cursor.getInt(cursor.getColumnIndex("birth_year"))
                             );
                     contactArrayList.add(contact);
-                } while (cursor.moveToNext());
+                    counter ++;
+                } while (cursor.moveToNext()/* && counter < rowsToLoad*/);
             }
+
             cursor.close();
         }
         return contactArrayList;
