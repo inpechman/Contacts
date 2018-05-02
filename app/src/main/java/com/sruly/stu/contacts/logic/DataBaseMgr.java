@@ -65,9 +65,9 @@ public class DataBaseMgr {
 
     public synchronized ArrayList<Contact> getByFilter(String filter, int offset, int rowsToLoad){
         ArrayList<Contact> contactArrayList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM all_contacts " + filter + " ORDER BY birth_year ASC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM all_contacts " + filter + " ORDER BY birth_year ASC LIMIT "+rowsToLoad+" OFFSET "+offset, null);
         if (cursor != null){
-            if (cursor.move(offset)/*cursor.moveToFirst()*/){
+            if (/*cursor.move(offset)*/cursor.moveToFirst()){
                 int counter = 0;
                 do {
                     Contact contact = new Contact(

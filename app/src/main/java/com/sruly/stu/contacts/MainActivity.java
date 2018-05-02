@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(){
             @Override
             public void run() {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 100000; i++) {
                     Contact contact = new Contact("f" + i, "l" + i, "" + i, (int) (Math.random()*100 + 1918));
                     DataBaseMgr.getInstance(getApplicationContext()).insertContact(contact);
                 }

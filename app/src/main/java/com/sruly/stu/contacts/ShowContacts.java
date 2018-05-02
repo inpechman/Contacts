@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.widget.TextView;
 
 import com.sruly.stu.contacts.logic.Contact;
 import com.sruly.stu.contacts.logic.DataBaseMgr;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShowContacts extends AppCompatActivity {
     TextView infoBar;

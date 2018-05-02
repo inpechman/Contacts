@@ -54,7 +54,7 @@ class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactVH> {
     public void onBindViewHolder(ContactVH holder, int position) {
         holder.update(contactArrayList.get(position));
         infoBar.setText(position + " / " + getItemCount());
-        if (position == getItemCount() - 5 && listener != null) {
+        if (position == getItemCount() - 10 && listener != null) {
             listener.onFinishScroll(type, contactArrayList);
         }
     }
