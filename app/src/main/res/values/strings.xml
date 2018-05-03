@@ -9,4 +9,5 @@
     <string name="enter_id_field_text">enter ID number</string>
     <string name="enter_birth_year_field_text">enter birth year</string>
     <string name="save_new_contact_btn_text">save</string>
+    <string name="go_to_pos_btn_text">go to</string>
 </resources>

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by stu on 4/30/2018.
@@ -52,19 +53,19 @@ public class DataBaseMgr {
 
     }
 
-    public synchronized ArrayList<Contact> getAll(int offset, int rowsToLoad){
+    public synchronized LinkedList<Contact> getAll(int offset, int rowsToLoad){
         return getByFilter("", offset, rowsToLoad);
     }
 
-    public synchronized ArrayList<Contact> getByDate(int year, boolean reverse, int offset, int rowsToLoad){
+    public synchronized LinkedList<Contact> getByDate(int year, boolean reverse, int offset, int rowsToLoad){
         String filter = "WHERE birth_year " +
                 (reverse ? "<=" : ">=") +
                 year;
         return getByFilter(filter, offset, rowsToLoad);
     }
 
-    public synchronized ArrayList<Contact> getByFilter(String filter, int offset, int rowsToLoad){
-        ArrayList<Contact> contactArrayList = new ArrayList<>();
+    public synchronized LinkedList<Contact> getByFilter(String filter, int offset, int rowsToLoad){
+        LinkedList<Contact> contactArrayList = new LinkedList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM all_contacts " + filter + " ORDER BY birth_year ASC LIMIT "+rowsToLoad+" OFFSET "+offset, null);
         if (cursor != null){
             if (/*cursor.move(offset)*/cursor.moveToFirst()){

@@ -2,7 +2,7 @@ package com.sruly.stu.contacts;
 
 import com.sruly.stu.contacts.logic.Contact;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by stu on 5/1/2018.
@@ -10,5 +10,5 @@ import java.util.ArrayList;
  */
 
 public interface OnFinishScrollListener {
-    public void onFinishScroll(int type, ArrayList<Contact> contactArrayList);
+    public void onFinishScroll(int type, LinkedList<Contact> contactArrayList);
 }

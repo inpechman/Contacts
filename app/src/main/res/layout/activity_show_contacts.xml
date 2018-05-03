@@ -6,10 +6,36 @@
     android:layout_height="match_parent"
     tools:context="com.sruly.stu.contacts.ShowContacts"
     android:orientation="vertical">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/position_from_all"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/go_to_pos_num_field"
+            android:nextFocusUp="@id/go_to_pos_num_field"
+            android:nextFocusLeft="@id/go_to_pos_num_field"
+            android:nextFocusForward="@id/go_to_pos_num_field"
+            android:nextFocusDown="@id/go_to_pos_num_field"
+            android:nextFocusRight="@id/go_to_pos_num_field"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:id="@+id/position_from_all"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/go_to_pos_btn"
+            android:text="@string/go_to_pos_btn_text"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
